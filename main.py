@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import QDate
 import bdd
+from newcards import *
 
 class Main(QMainWindow):
     def __init__(self):
@@ -78,7 +79,7 @@ class Main(QMainWindow):
     def saveCard9(self):
         print("Save 9")
 
-    def clearCard18(self):
+    '''def clearCard18(self):
         print("Clear 18")
         self.cmb_club_1.clear()
         self.cmb_club_2.clear()
@@ -116,32 +117,10 @@ class Main(QMainWindow):
         self.cmb_hole_15.clear()
         self.cmb_hole_16.clear()
         self.cmb_hole_17.clear()
-        self.cmb_hole_18.clear()
-
-    def clearCard9(self):
-        print(("Clear 9"))
-        self.cmb_club_1_9.clear()
-        self.cmb_club_2_9.clear()
-        self.cmb_club_3_9.clear()
-        self.cmb_club_4_9.clear()
-        self.cmb_club_5_9.clear()
-        self.cmb_club_6_9.clear()
-        self.cmb_club_7_9.clear()
-        self.cmb_club_8_9.clear()
-        self.cmb_club_9_9.clear()
-
-        self.cmb_hole_1_9.clear()
-        self.cmb_hole_2_9.clear()
-        self.cmb_hole_3_9.clear()
-        self.cmb_hole_4_9.clear()
-        self.cmb_hole_5_9.clear()
-        self.cmb_hole_6_9.clear()
-        self.cmb_hole_7_9.clear()
-        self.cmb_hole_8_9.clear()
-        self.cmb_hole_9_9.clear()
+        self.cmb_hole_18.clear()'''
 
     def addCardPage9(self):
-        self.clearCard9()
+        clearCard9(self)
         bddConnect = bdd.Bdd()
         list_clubs = bddConnect.read("SELECT * FROM clubs ORDER BY idclubs")
 
@@ -209,7 +188,7 @@ class Main(QMainWindow):
                     self.cmb_hole_9_9.addItem(str(i))
 
     def addCardPage18(self):
-        self.clearCard18()
+        clearCard18(self)
         bddConnect = bdd.Bdd()
         list_clubs = bddConnect.read("SELECT * FROM clubs ORDER BY idclubs")
 
