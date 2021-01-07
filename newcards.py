@@ -1,3 +1,9 @@
+def saveCard18(self):
+    print("Save 18")
+
+def saveCard9(self):
+    print("Save 9")
+
 def clearCard9(self):
     print(("Clear 9"))
     self.cmb_club_1_9.clear()

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1559</width>
-    <height>1025</height>
+    <width>1245</width>
+    <height>632</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -221,7 +221,7 @@
             </rect>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="page_2">
             <widget class="QWidget" name="gridLayoutWidget_3">
@@ -343,13 +343,6 @@
               </item>
               <item row="10" column="4">
                <widget class="QLabel" name="lbl_hole_11"/>
-              </item>
-              <item row="16" column="5" colspan="3">
-               <widget class="QPushButton" name="btn_valid">
-                <property name="text">
-                 <string>Enregistrer</string>
-                </property>
-               </widget>
               </item>
               <item row="9" column="9">
                <widget class="QLabel" name="label_8">
@@ -761,6 +754,16 @@
               <item row="3" column="3">
                <widget class="QComboBox" name="cmb_hole_1"/>
               </item>
+              <item row="16" column="5" colspan="3">
+               <widget class="QPushButton" name="btn_valid">
+                <property name="text">
+                 <string>Enregistrer</string>
+                </property>
+                <property name="checkable">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </widget>
@@ -1062,7 +1065,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1559</width>
+     <width>1245</width>
      <height>24</height>
     </rect>
    </property>
@@ -1177,14 +1180,6 @@
   <action name="actionAddCard">
    <property name="text">
     <string>Ajouter une carte de score</string>
-   </property>
-  </action>
-  <action name="actionValidCard">
-   <property name="text">
-    <string>Validation Carte</string>
-   </property>
-   <property name="toolTip">
-    <string>Valider une carte de score</string>
    </property>
   </action>
  </widget>

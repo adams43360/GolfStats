@@ -16,8 +16,8 @@ class Main(QMainWindow):
         # Actions
         self.actionCards.triggered.connect(self.scoreCardsPage)
         self.actionAddCard.triggered.connect(self.addCardPage)
-        self.btn_valid.clicked.connect(self.saveCard18)
-        self.btn_valid_9.clicked.connect(self.saveCard9)
+        self.btn_valid.clicked.connect(saveCard18)
+        self.btn_valid_9.clicked.connect(saveCard9)
         self.scoreCardsPage()
         self.cmb_course.currentIndexChanged.connect(self.nbHoles)
 
@@ -73,51 +73,7 @@ class Main(QMainWindow):
             for column_number, data in enumerate(row_data):
                 self.tab_result.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
-    def saveCard18(self):
-        print("Save 18")
 
-    def saveCard9(self):
-        print("Save 9")
-
-    '''def clearCard18(self):
-        print("Clear 18")
-        self.cmb_club_1.clear()
-        self.cmb_club_2.clear()
-        self.cmb_club_3.clear()
-        self.cmb_club_4.clear()
-        self.cmb_club_5.clear()
-        self.cmb_club_6.clear()
-        self.cmb_club_7.clear()
-        self.cmb_club_8.clear()
-        self.cmb_club_9.clear()
-        self.cmb_club_10.clear()
-        self.cmb_club_11.clear()
-        self.cmb_club_12.clear()
-        self.cmb_club_13.clear()
-        self.cmb_club_14.clear()
-        self.cmb_club_15.clear()
-        self.cmb_club_16.clear()
-        self.cmb_club_17.clear()
-        self.cmb_club_18.clear()
-
-        self.cmb_hole_1.clear()
-        self.cmb_hole_2.clear()
-        self.cmb_hole_3.clear()
-        self.cmb_hole_4.clear()
-        self.cmb_hole_5.clear()
-        self.cmb_hole_6.clear()
-        self.cmb_hole_7.clear()
-        self.cmb_hole_8.clear()
-        self.cmb_hole_9.clear()
-        self.cmb_hole_10.clear()
-        self.cmb_hole_11.clear()
-        self.cmb_hole_12.clear()
-        self.cmb_hole_13.clear()
-        self.cmb_hole_14.clear()
-        self.cmb_hole_15.clear()
-        self.cmb_hole_16.clear()
-        self.cmb_hole_17.clear()
-        self.cmb_hole_18.clear()'''
 
     def addCardPage9(self):
         clearCard9(self)
