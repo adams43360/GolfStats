@@ -5,6 +5,7 @@ from PyQt5.QtCore import QDate
 import bdd
 from newcards import *
 from setComboBox import *
+from scoreCard import *
 
 class Main(QMainWindow):
     def __init__(self):
@@ -15,11 +16,11 @@ class Main(QMainWindow):
 
     def setupUi(self):
         # Actions
-        self.actionCards.triggered.connect(self.scoreCardsPage)
+        self.actionCards.triggered.connect(scoreCardsPage) # Issue i haven't ths self
         self.actionAddCard.triggered.connect(self.addCardPage)
-        self.scoreCardsPage()
+        scoreCardsPage(self)
 
-    def scoreCardsPage(self):
+    '''def scoreCardsPage(self):
         # Hide ToolBar
         self.toolBarCards.hide()
         self.toolBarParameters.hide()
@@ -59,7 +60,7 @@ class Main(QMainWindow):
         for row_number, row_data in enumerate(list_card):
             self.tab_result.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                self.tab_result.setItem(row_number, column_number, QTableWidgetItem(str(data)))
+                self.tab_result.setItem(row_number, column_number, QTableWidgetItem(str(data)))'''
 
     def addCardPage(self):
         self.date_score.setDate(QDate.currentDate())
