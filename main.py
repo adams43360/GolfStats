@@ -1,8 +1,5 @@
 import sys
-from PyQt5.QtWidgets import *
 from PyQt5 import uic
-from PyQt5.QtCore import QDate
-import bdd
 from newcards import *
 from setComboBox import *
 from scoreCard import *
@@ -16,11 +13,20 @@ class Main(QMainWindow):
 
     def setupUi(self):
         # Actions
-        self.actionCards.triggered.connect(scoreCardsPage) # Issue i haven't ths self
+        self.actionCards.triggered.connect(self.scoreCardsPage)
         self.actionAddCard.triggered.connect(self.addCardPage)
-        scoreCardsPage(self)
+        self.scoreCardsPage()
 
-    '''def scoreCardsPage(self):
+    def saveCard9(self):
+        print("Save 9")
+
+        for i in range(8):
+            i += 1
+            score = "cmb_hole_" + str(i) + "_9"
+
+            print(getattr(self, score).currentText())
+
+    def scoreCardsPage(self):
         # Hide ToolBar
         self.toolBarCards.hide()
         self.toolBarParameters.hide()
@@ -60,7 +66,7 @@ class Main(QMainWindow):
         for row_number, row_data in enumerate(list_card):
             self.tab_result.insertRow(row_number)
             for column_number, data in enumerate(row_data):
-                self.tab_result.setItem(row_number, column_number, QTableWidgetItem(str(data)))'''
+                self.tab_result.setItem(row_number, column_number, QTableWidgetItem(str(data)))
 
     def addCardPage(self):
         self.date_score.setDate(QDate.currentDate())
@@ -69,7 +75,7 @@ class Main(QMainWindow):
 
         self.cmb_course.currentIndexChanged.connect(self.nbHoles)
         self.btn_valid.clicked.connect(saveCard18)
-        self.btn_valid_9.clicked.connect(saveCard9)
+        self.btn_valid_9.clicked.connect(self.saveCard9)
 
         # Insert data in ComboBox
         lstCourses(self)
@@ -79,8 +85,8 @@ class Main(QMainWindow):
         lstParty(self)
         lstBalls(self)
 
+
     def nbHoles(self):
-        print("passe par là")
         bddConnect = bdd.Bdd()
         hole_number = bddConnect.read("SELECT coursesholes FROM courses WHERE courses.idcourses = " + self.cmb_course.itemData(self.cmb_course.currentIndex()))
 

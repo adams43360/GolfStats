@@ -7,16 +7,18 @@ class Bdd():
         except sqlite3.Error as error:
             print("Erreur lors de la connexion à SQLite", error)
 
-    def create(self, sql):
-        pass
+    def insert(self, request):
+        cur = self.conn.cursor()
+        cur.execute(request)
+        self.conn.commit()
+        return cur.lastrowid
 
     def read(self, request):
         cur = self.conn.cursor()
-
         return cur.execute(request)
 
-        cur.close()
-        conn.close()
+        #cur.close()
+        #conn.close()
 
     def update(self, sql):
         pass

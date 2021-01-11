@@ -3,11 +3,30 @@ import bdd
 def saveCard18(self):
     print("Save 18")
 
-def saveCard9(self):
+'''def saveCard9(self):
     print("Save 9")
 
+    for i in range(8):
+        i += 1
+        value = "cmb_hole_" + str(i) + "_9"
+        
+        print(getattr(self, value).currentText())
+        
+        # Insert scorecards
+    dateScore = str(self.date_score.text())
+    sql = f"""INSERT INTO scorecards (scorecardsdate, idcourses, idpartytype, idstreterballs, idballs, idweather, idtermes) VALUES ('{dateScore}')"""
+
+    bddConnect = bdd.Bdd()
+    bddinsert = bddConnect.insert(sql)
+    print(bddinsert)
+
+    # Insert results data
+    for i in range(8):
+        resultClub = 
+        sql = "INSERT INTO results (idholes, resultscore, resultfairway, resultgreen, idclubs, resultcomment, idscorecards) VALUES ()"'''
+
+
 def clearCard9(self):
-    print(("Clear 9"))
     self.cmb_club_1_9.clear()
     self.cmb_club_2_9.clear()
     self.cmb_club_3_9.clear()
@@ -29,7 +48,6 @@ def clearCard9(self):
     self.cmb_hole_9_9.clear()
 
 def clearCard18(self):
-    print("Clear 18")
     self.cmb_club_1.clear()
     self.cmb_club_2.clear()
     self.cmb_club_3.clear()
