@@ -1,90 +1,34 @@
 import bdd
 
-def saveCard18(self):
-    print("Save 18")
-
-'''def saveCard9(self):
-    print("Save 9")
-
-    for i in range(8):
-        i += 1
-        value = "cmb_hole_" + str(i) + "_9"
-        
-        print(getattr(self, value).currentText())
-        
-        # Insert scorecards
-    dateScore = str(self.date_score.text())
-    sql = f"""INSERT INTO scorecards (scorecardsdate, idcourses, idpartytype, idstreterballs, idballs, idweather, idtermes) VALUES ('{dateScore}')"""
-
-    bddConnect = bdd.Bdd()
-    bddinsert = bddConnect.insert(sql)
-    print(bddinsert)
-
-    # Insert results data
-    for i in range(8):
-        resultClub = 
-        sql = "INSERT INTO results (idholes, resultscore, resultfairway, resultgreen, idclubs, resultcomment, idscorecards) VALUES ()"'''
-
-
 def clearCard9(self):
-    self.cmb_club_1_9.clear()
-    self.cmb_club_2_9.clear()
-    self.cmb_club_3_9.clear()
-    self.cmb_club_4_9.clear()
-    self.cmb_club_5_9.clear()
-    self.cmb_club_6_9.clear()
-    self.cmb_club_7_9.clear()
-    self.cmb_club_8_9.clear()
-    self.cmb_club_9_9.clear()
+    for i in range(9):
+        score = "cmb_hole_" + str(i + 1) + "_9"
+        club = "cmb_club_" + str(i + 1) + "_9"
+        fairway = "chk_fairway_" + str(i + 1) + "_9"
+        green = "chk_green_" + str(i + 1) + "_9"
 
-    self.cmb_hole_1_9.clear()
-    self.cmb_hole_2_9.clear()
-    self.cmb_hole_3_9.clear()
-    self.cmb_hole_4_9.clear()
-    self.cmb_hole_5_9.clear()
-    self.cmb_hole_6_9.clear()
-    self.cmb_hole_7_9.clear()
-    self.cmb_hole_8_9.clear()
-    self.cmb_hole_9_9.clear()
+        getattr(self, score).clear()
+        getattr(self, club).clear()
+        getattr(self, fairway).setChecked(False)
+        getattr(self, green).setChecked(False)
+
+        # Enable saved button
+        self.btn_valid_9.setEnabled(True)
 
 def clearCard18(self):
-    self.cmb_club_1.clear()
-    self.cmb_club_2.clear()
-    self.cmb_club_3.clear()
-    self.cmb_club_4.clear()
-    self.cmb_club_5.clear()
-    self.cmb_club_6.clear()
-    self.cmb_club_7.clear()
-    self.cmb_club_8.clear()
-    self.cmb_club_9.clear()
-    self.cmb_club_10.clear()
-    self.cmb_club_11.clear()
-    self.cmb_club_12.clear()
-    self.cmb_club_13.clear()
-    self.cmb_club_14.clear()
-    self.cmb_club_15.clear()
-    self.cmb_club_16.clear()
-    self.cmb_club_17.clear()
-    self.cmb_club_18.clear()
+    # Enable saved button
+    self.btn_valid.setEnabled(True)
 
-    self.cmb_hole_1.clear()
-    self.cmb_hole_2.clear()
-    self.cmb_hole_3.clear()
-    self.cmb_hole_4.clear()
-    self.cmb_hole_5.clear()
-    self.cmb_hole_6.clear()
-    self.cmb_hole_7.clear()
-    self.cmb_hole_8.clear()
-    self.cmb_hole_9.clear()
-    self.cmb_hole_10.clear()
-    self.cmb_hole_11.clear()
-    self.cmb_hole_12.clear()
-    self.cmb_hole_13.clear()
-    self.cmb_hole_14.clear()
-    self.cmb_hole_15.clear()
-    self.cmb_hole_16.clear()
-    self.cmb_hole_17.clear()
-    self.cmb_hole_18.clear()
+    for i in range(18):
+        score = "cmb_hole_" + str(i + 1)
+        club = "cmb_club_" + str(i + 1)
+        fairway = "chk_fairway_" + str(i + 1)
+        green = "chk_green_" + str(i + 1)
+
+        getattr(self, score).clear()
+        getattr(self, club).clear()
+        getattr(self, fairway).setChecked(False)
+        getattr(self, green).setChecked(False)
 
 def addCardPage9(self):
     clearCard9(self)
