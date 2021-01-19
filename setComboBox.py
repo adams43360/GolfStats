@@ -8,14 +8,12 @@ def lstCourses(self):
     for row in liste_courses:
         self.cmb_course.addItem(str(row[0] + " : " + row[2]), str(row[1]))
 
-
 def lstWeather(self):
     bddConnect = bdd.Bdd()
     liste_weather = bddConnect.read("SELECT * FROM weather ORDER BY weathername")
 
     for row in liste_weather:
         self.cmb_weather.addItem(str(row[1]), str(row[0]))
-
 
 def lstSpeed(self):
     bddConnect = bdd.Bdd()
@@ -24,7 +22,6 @@ def lstSpeed(self):
     for row in liste_speed:
         self.cmb_speed.addItem(str(row[1]), str(row[0]))
 
-
 def lstStarter(self):
     bddConnect = bdd.Bdd()
     liste_starter = bddConnect.read("SELECT * FROM starterballs ORDER BY starterballsname")
@@ -32,14 +29,12 @@ def lstStarter(self):
     for row in liste_starter:
         self.cmb_starter.addItem(str(row[1]), str(row[0]))
 
-
 def lstParty(self):
     bddConnect = bdd.Bdd()
     liste_party = bddConnect.read("SELECT * FROM partytype ORDER BY partytypename")
 
     for row in liste_party:
         self.cmb_party.addItem(str(row[1]), str(row[0]))
-
 
 def lstBalls(self):
     bddConnect = bdd.Bdd()

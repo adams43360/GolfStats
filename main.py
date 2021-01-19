@@ -2,6 +2,7 @@ import sys
 from PyQt5 import uic
 from setComboBox import *
 from scoreCard import *
+from PyQt5.QtWidgets import QMessageBox
 
 class Main(QMainWindow):
     def __init__(self):
@@ -30,6 +31,22 @@ class Main(QMainWindow):
             return "error"
 
         return endObject, j
+
+    def deleteScoreCard(self, item):
+        msg = QMessageBox()
+        msg.setWindowTitle("Supprimer carte")
+        msg.setText("Souhaitez-vous supprimer votre carte de score n°" + self.tab_result.item(item, 0).text() + " ?")
+        msg.setStandardButtons(QMessageBox.Ok |QMessageBox.Cancel)
+        result_delete = msg.exec_()
+
+        if result_delete == QMessageBox.Ok:
+            id_scorecard = self.tab_result.item(item, 0).text()
+            sql = f"""DELETE FROM scorecards WHERE idscorecards = {id_scorecard}"""
+            bddConnect = bdd.Bdd()
+            delete_scorecards = bddConnect.delete(sql)
+            sql = f"""DELETE FROM results WHERE idscorecards = {id_scorecard}"""
+            delete_scorecards = bddConnect.delete(sql)
+            self.tab_result.removeRow(item)
 
     def clearCard(self):
         endObject, j = self.paramHoles()
@@ -120,7 +137,6 @@ class Main(QMainWindow):
             sql = f"""INSERT INTO results (idholes, resultscore, resultfairway, resultgreen, idclubs, resultcomment, idscorecards) 
                                              VALUES ({i + 1}, {id_score}, {id_fairway}, {id_green}, {id_club}, "", {id_card})"""
             id_score = bddConnect.insert(sql)
-            print("card inserted n° : " + str(id_score))
 
     def scoreCardsPage(self):
         # Hide ToolBar
@@ -134,7 +150,8 @@ class Main(QMainWindow):
         self.stacked.setCurrentIndex(0)
         self.tab_result.setColumnCount(9)
         self.tab_result.setHorizontalHeaderLabels(["Id carte", "Date", "Parcours", "Score", "Nb Fairway", "Greens en régulation", "Météo", "Fluidité de jeu", "Mode de jeu"])
-        #self.tab_result.cellDoubleClicked.connect(lambda item: self.addCardPage(item=item))
+        self.tab_result.cellDoubleClicked.connect(lambda item: self.deleteScoreCard(item=item))
+
         self.setWindowTitle("Mes cartes de score")
 
         sql = "SELECT scorecards.idscorecards, " \
@@ -169,7 +186,6 @@ class Main(QMainWindow):
         self.stacked.setCurrentIndex(1)
         self.setWindowTitle("Ajouter une carte de score")
         self.nbHoles()
-        print(self.nbHole)
 
         self.cmb_course.currentIndexChanged.connect(self.nbHoles)
         self.btn_valid.clicked.connect(self.saveCard)
@@ -189,14 +205,12 @@ class Main(QMainWindow):
         lstParty(self)
         lstBalls(self)
 
-
     def nbHoles(self):
         bddConnect = bdd.Bdd()
         hole_number = bddConnect.read("SELECT coursesholes FROM courses WHERE courses.idcourses = " + self.cmb_course.itemData(self.cmb_course.currentIndex()))
 
         if hole_number.fetchone()[0] == 9:
             self.stackedWidget.setCurrentIndex(1)
-            #addCardPage9(self)
             self.nbHole = 9
             self.addCardPages()
 
@@ -204,8 +218,6 @@ class Main(QMainWindow):
             self.stackedWidget.setCurrentIndex(0)
             self.nbHole = 18
             self.addCardPages()
-
-            #addCardPage18(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

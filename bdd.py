@@ -17,14 +17,14 @@ class Bdd():
         cur = self.conn.cursor()
         return cur.execute(request)
 
-        #cur.close()
-        #conn.close()
-
     def update(self, sql):
         pass
 
-    def delete(self, sql):
-        pass
+    def delete(self, request):
+        cur = self.conn.cursor()
+        cur.execute(request)
+        self.conn.commit()
+        return "deleted"
 
 def main():
     connection = Bdd()
