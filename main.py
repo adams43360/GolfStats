@@ -18,7 +18,7 @@ class Main(QMainWindow):
         self.nbHole = 0
         lstCourses(self)
 
-    def clearCard(self):
+    def paramHoles(self):
         if self.nbHole == 9:
             endObject = "_9"
             j = 9
@@ -28,6 +28,11 @@ class Main(QMainWindow):
         else:
             print("Save error")
             return "error"
+
+        return endObject, j
+
+    def clearCard(self):
+        endObject, j = self.paramHoles()
 
         for i in range(j):
             score = "cmb_hole_" + str(i + 1) + str(endObject)
@@ -46,16 +51,7 @@ class Main(QMainWindow):
 
     def addCardPages(self):
         self.clearCard()
-
-        if self.nbHole == 9:
-            endObject = "_9"
-            j = 9
-        elif self.nbHole == 18:
-            endObject = ""
-            j = 18
-        else:
-            print("Save error")
-            return "error"
+        endObject, j = self.paramHoles()
 
         bddConnect = bdd.Bdd()
         list_clubs = bddConnect.read("SELECT * FROM clubs ORDER BY idclubs")
@@ -100,17 +96,7 @@ class Main(QMainWindow):
         id_card = bddConnect.insert(sql)
 
         # Save all the line into results
-        if self.nbHole == 9:
-            print("Save 9")
-            endObject = "_9"
-            j = 9
-        elif self.nbHole == 18:
-            print("Save 18")
-            endObject = ""
-            j = 18
-        else:
-            print("Save error")
-            return "error"
+        endObject, j = self.paramHoles()
 
         for i in range(j):
             score = "cmb_hole_" + str(i + 1) + str(endObject)
