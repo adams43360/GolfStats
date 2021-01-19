@@ -1,6 +1,5 @@
 import sys
 from PyQt5 import uic
-from newcards import *
 from setComboBox import *
 from scoreCard import *
 
@@ -18,6 +17,67 @@ class Main(QMainWindow):
         self.scoreCardsPage()
         self.nbHole = 0
         lstCourses(self)
+
+    def clearCard(self):
+        if self.nbHole == 9:
+            endObject = "_9"
+            j = 9
+        elif self.nbHole == 18:
+            endObject = ""
+            j = 18
+        else:
+            print("Save error")
+            return "error"
+
+        for i in range(j):
+            score = "cmb_hole_" + str(i + 1) + str(endObject)
+            club = "cmb_club_" + str(i + 1) + str(endObject)
+            fairway = "chk_fairway_" + str(i + 1) + str(endObject)
+            green = "chk_green_" + str(i + 1) + str(endObject)
+
+            getattr(self, score).clear()
+            getattr(self, club).clear()
+            getattr(self, fairway).setChecked(False)
+            getattr(self, green).setChecked(False)
+
+            # Enable saved button
+            self.btn_valid.setEnabled(True)
+            self.btn_valid_9.setEnabled(True)
+
+    def addCardPages(self):
+        self.clearCard()
+
+        if self.nbHole == 9:
+            endObject = "_9"
+            j = 9
+        elif self.nbHole == 18:
+            endObject = ""
+            j = 18
+        else:
+            print("Save error")
+            return "error"
+
+        bddConnect = bdd.Bdd()
+        list_clubs = bddConnect.read("SELECT * FROM clubs ORDER BY idclubs")
+
+        for row in list_clubs:
+            for i in range(j):
+                club = "cmb_club_" + str(i + 1) + str(endObject)
+                getattr(self, club).addItem(str(row[2]), str(row[0]))
+
+        list_score = bddConnect.read(
+            "SELECT holesnumber, holespar FROM holes WHERE idcourses = " + self.cmb_course.itemData(
+                self.cmb_course.currentIndex()) + " ORDER BY holesnumber")
+
+        for row in list_score:
+            maxScore = row[1] + 6
+            hole = "lbl_hole_" + str(row[0]) + str(endObject)
+
+            getattr(self, hole).setText(str(row[1]))
+
+            for i in range(maxScore):
+                score = "cmb_hole_" + str(row[0]) + str(endObject)
+                getattr(self, score).addItem(str(i))
 
     def saveCard(self):
         # Disable saved button
@@ -123,6 +183,7 @@ class Main(QMainWindow):
         self.stacked.setCurrentIndex(1)
         self.setWindowTitle("Ajouter une carte de score")
         self.nbHoles()
+        print(self.nbHole)
 
         self.cmb_course.currentIndexChanged.connect(self.nbHoles)
         self.btn_valid.clicked.connect(self.saveCard)
@@ -149,12 +210,16 @@ class Main(QMainWindow):
 
         if hole_number.fetchone()[0] == 9:
             self.stackedWidget.setCurrentIndex(1)
-            addCardPage9(self)
+            #addCardPage9(self)
             self.nbHole = 9
+            self.addCardPages()
+
         else:
             self.stackedWidget.setCurrentIndex(0)
-            addCardPage18(self)
             self.nbHole = 18
+            self.addCardPages()
+
+            #addCardPage18(self)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
